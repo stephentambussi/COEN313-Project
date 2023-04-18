@@ -1,0 +1,34 @@
+Keep a generic interface as possible.
+There is a variable called currentCycle (global variable that is an integer) you don’t control it, you just read it from somewhere
+Professor will give pseudocode for how to do currentCycle/pseudocode for the main program
+currentCycle is what cycle you are on 
+Project gets more complicated at end of course
+Memory access will always be a hit, maybe next group will come and will improve upon this
+currentCycle is available for every module
+Instruction fetch has an input and an output
+Input is a class S and an unsigned integer (the currentCycle variable)
+Output is type T, and an unsigned integer 
+If you are the fetch unit I am going to send you an instruction, it might be 32 bit binary, or maybe a text line from an assembler (load instruction ldr, branch instruction beq, etc.)
+And the integer is the time that you receive said instruction
+Input and output are going to be FIFOs 
+Take something from the input queue 
+Call a function, call it In(f) where f is FIFO queue 
+If it is less than currentCycle, 
+Might have other data structures that are global to all modules  for example, a register file 
+For example, its time 7, then you send your work to a module, then work happens 2 cycles happen later, then output will be T and 9 
+And the next module maybe compares currentCycle to T and 9 and may say something along the lines of “CurrentCycle is 8, but work on previous module is done on cycle 9, this is a problem and we have to quit”
+Or instead it might be that currentCycle is 8 and previous module work is done on cycle 7, then we are okay since the previous module’s work is already done, we can continue to the next module 
+Before you suck some element from input, check if space in output queue first then check if there is something in the input queue to take from 
+For input, create any S type you like
+For output, create any T type you like, 
+Show that the queue is working, sucking in input and creating output  
+Main program increments current cycle by 1
+
+Lecture on 4-12-23
+Build an instruction fetch unit 
+It reads input from cache, but for the time being that you always supply PC to something unknown and get back a 32 bit quantity which is an instruction 
+Right now input is a FIFO queue (for now, but this might change), so for right now this may be coming from a “trace” (not sure if this is the same as reading it from a file)
+Also while reading an instruction there may be some sort of delay, (like if it’s a cache hit or a cache miss)
+If it’s a hit then its currentCycle + 1
+If it’s a miss, then its currentCycle + 10 (for example)
+Going to try and put snippets of code on the page on Camino
